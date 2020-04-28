@@ -1,0 +1,24 @@
+0,Rock,0,2,Can be sharpened.
+1,Stick,1,2,Can turn to fire.
+2,Axe,2,2,Can use on other.
+3,Berries,3,2,Can be eaten or cooked.
+4,Seeds,4,2,Can be planted or eaten.
+5,Spear,5,2,Better attack.
+6,Knife,6,2,Better foraging and attack.
+7,Sharpened Rock,7,2,Little better foraging and attacking.
+8,Feather,8,2,Used for arrows and decorations.
+9,Meat,9,2,Can be cooked.
+10,Fish,10,2,Can be cooked.
+11,Clay,11,2,Very useful.
+12,Sharpened Bone,12,2,lighter than stone.
+13,Bone,13,2,Better than a stick.
+14,Flint,14,2,Can be very sharp.
+15,Fiber,15,2, Useful for crafting.
+16,Fishing net,0,3,Can catch fish.
+17,Rope,1,3,Holds things together.
+18,Clay Pot,2,3,Sturdy capacity.
+19,Weaved basket,3,3,Quick capacity.
+20,Egg,4,3,Can be hatched or eaten.
+21,Mushroom,5,3,What did one mushroom say to the other? You're one fun guy.
+22,Cooked Meat,6,3,Can give cooked meat to plebeians to join you.
+23,Cooked Fish,7,3,Can give cooked fish to plebeians to join you.

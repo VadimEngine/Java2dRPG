@@ -1,0 +1,7 @@
+Cooking,10,0
+Foraging,10,1
+Fishing,10,2
+Hunting,10,3
+Crafting,10,4
+Farming,10,5
+Gathering,10,6
