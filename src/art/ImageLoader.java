@@ -24,9 +24,9 @@ public class ImageLoader {
 			InputStream input = ImageLoader.class.getClassLoader().getResourceAsStream(file);
 			image = ImageIO.read(input);
 			
-			ImageIcon icon = new ImageIcon(image);
+			//ImageIcon icon = new ImageIcon(image);
 			
-			JOptionPane.showMessageDialog(null, file, "Message", JOptionPane.INFORMATION_MESSAGE ,icon);
+			//JOptionPane.showMessageDialog(null, file, "Message", JOptionPane.INFORMATION_MESSAGE ,icon);
 		
 		
 		} catch (IOException e) {

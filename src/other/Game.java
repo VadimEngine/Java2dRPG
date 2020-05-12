@@ -112,7 +112,6 @@ public class Game extends Canvas implements Runnable {
 					frames = 0;
 				}
 			}
-
 			if (ticked) {
 				render();
 				frames++;
@@ -123,9 +122,7 @@ public class Game extends Canvas implements Runnable {
 					e.printStackTrace();
 				}
 			}
-
 		}
-
 	}
 
 	/**
