@@ -65,7 +65,8 @@ public class MenuState extends AbstractGameState {//remove the constants, render
 		if (x > 640/2 -100 && x < 640/2 -100 + 250 &&
 				y > 110 + 0*86 && y < 110 + 0*86 + 38) {
 			//handler.setGameState(new PlayState2(handler));
-			currentState = new PlayState2(handler);
+			//currentState = new PlayState2(handler);
+			currentState = new PlayState(handler);
 		} else if (x > 640/2 -100 && x < 640/2 -100 + 250 &&
 				y > 110 + 1*86 && y <110 + 1*86 + 38) {
 			//handler.setGameState(new LoadGameState(handler));

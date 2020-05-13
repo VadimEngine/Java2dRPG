@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import art.Art;
@@ -28,13 +31,15 @@ import testingEnt.Player;
 import testingEnt.TestSolidBlock;
 
 /**
- * BIG MESS OF A CLASS NEEDS TO BE CLEANED
+ * Original Game state. Requires redesign to allow reusability and maintainability
  * @author Vadim Goncharuk
  *
  */
 public class PlayState extends AbstractGameState {
 	
 	private static Random random = new Random();
+	
+	private static Map<Color, BufferedImage> ColorTileMap = new HashMap<>();
 
 	private GameMob temp = new GameMob();
 	private StatusMenu sm = new StatusMenu(temp);
@@ -63,10 +68,21 @@ public class PlayState extends AbstractGameState {
 
 	private List<AbstractEntity> entities = new ArrayList<>();
 	
+	static {
+		ColorTileMap.put(new Color(0,255,0), Art.SPRITES[1][0]);//grass
+		ColorTileMap.put(new Color(0,155,0), Art.SPRITES[1][1]);//trees
+		ColorTileMap.put(new Color(0,0,255), Art.SPRITES[1][2]);//water
+		ColorTileMap.put(new Color(255,255,0), Art.SPRITES[1][3]);//sand
+		ColorTileMap.put(new Color(255,255,255), Art.SPRITES[1][4]);//snow
+		ColorTileMap.put(new Color(155,155,155), Art.SPRITES[1][5]);//stone
+		ColorTileMap.put(new Color(135,90,30), Art.SPRITES[1][6]);//dirt
+		ColorTileMap.put(new Color(180,100,70), Art.SPRITES[1][15]);//tilledDirt
+	}
+	
 	public PlayState(Handler handler) {
 		super(handler);
 		
-		entities.add(new Player(50,50,handler, entities));
+		//entities.add(new Player(50,50,handler, entities));
 		entities.add(new TestSolidBlock(250,250, 48, 48));
 		entities.add(new testingEnt.Chicken(90,90, entities));
 		//testing purposes
@@ -85,7 +101,6 @@ public class PlayState extends AbstractGameState {
 		
 		miniMap = new MiniMap(Art.MAP, temp);
 		
-
 		for (int i = 0; i < Art.MAP.length; i++) {
 			for (int j = 0; j <Art.MAP[0].length; j++) {
 				if (Art.MAP[i][j].equals(new Color(0,0,255))) {
@@ -120,31 +135,12 @@ public class PlayState extends AbstractGameState {
 		}
 
 		g2d.translate(tranX, tranY);
-
-
 		
-		
+		//draw ground tiles based on map png
 		for (int i = 0; i < Art.MAP.length; i++) {
 			for (int j = 0; j < Art.MAP[0].length; j++) {
-
-				if (Art.MAP[i][j].equals(new Color(0,255,0))) {
-					g.drawImage(Art.SPRITES[1][0], 32*i, 32*j, 32, 32, null);//grass
-				} else if (Art.MAP[i][j].equals(new Color(0,155,0))) {
-					g.drawImage(Art.SPRITES[1][1], 32*i, 32*j, 32, 32, null);//trees
-				} else if (Art.MAP[i][j].equals(new Color(0,0,255))) {
-					g.drawImage(Art.SPRITES[1][2], 32*i, 32*j, 32, 32, null);//water
-				} else if (Art.MAP[i][j].equals(new Color(255,255,0))) {
-					g.drawImage(Art.SPRITES[1][3], 32*i, 32*j, 32, 32, null);//sand
-				} else if (Art.MAP[i][j].equals(new Color(255,255,255))) {
-					g.drawImage(Art.SPRITES[1][4], 32*i, 32*j, 32, 32, null);//snow
-				} else if (Art.MAP[i][j].equals(new Color(155,155,155))) {
-					g.drawImage(Art.SPRITES[1][5], 32*i, 32*j, 32, 32, null);//stone
-				} else if (Art.MAP[i][j].equals(new Color(135,90,30))) {
-					g.drawImage(Art.SPRITES[1][6], 32*i, 32*j, 32, 32, null);//dirt
-				} else if (Art.MAP[i][j].equals(new Color(180,100,70))) {
-					g.drawImage(Art.SPRITES[1][15], 32*i, 32*j, 32, 32, null);//tilledDirt
-				}
-			}
+				g.drawImage(ColorTileMap.get(Art.MAP[i][j]), 32*i, 32*j, 32, 32, null);//grass
+			}	
 		}
 		
 		for (int i = 0; i < entities.size(); i++) {
@@ -190,8 +186,6 @@ public class PlayState extends AbstractGameState {
 		g.drawRect(cornerX + 210, cornerY + 50, 260, 300);
 
 		g.drawString("Menu", cornerX + 315, cornerY + 70);
-
-
 
 		mainMenu.render(g, cornerX + 215, cornerY + 100);
 		settings.render(g, cornerX + 215, cornerY + 150);
@@ -279,8 +273,6 @@ public class PlayState extends AbstractGameState {
 		}
 
 		if (random.nextInt(1000) == 0) {//other items
-			//			int rand = random.nextInt(15);
-			//			items.add(new Item(Game.items.get(rand), (random.nextInt(64)) * 32, (random.nextInt(64)) * 32));
 			int rand = random.nextInt(2);
 			items.add(new Item(LoadedItems.ITEMLIST.get(rand), (random.nextInt(64)) * 32, (random.nextInt(64)) * 32, false));
 		}
@@ -316,11 +308,6 @@ public class PlayState extends AbstractGameState {
 		miniMap.tick();
 		for (int i = 0; i < chickens.size(); i++) {
 			chickens.get(i).tick();
-			//			if (colliding(temp.getX(), temp.getY(), temp.getWidth(),
-			//					chickens.get(i).getX(), chickens.get(i).getY(), chickens.get(i).getWidth())) {
-			//				chickens.get(i).die();
-			//				chickens.remove(i);
-			//			}
 		}
 
 		for (int i = 0; i < thrown.size(); i++) {
@@ -375,7 +362,7 @@ public class PlayState extends AbstractGameState {
 	}
 
 	private boolean colliding(int x1, int y1, int height1, int width1,
-			int x2, int y2, int height2, int width2) {
+							  int x2, int y2, int height2, int width2) {
 		if ((x2 >= x1 - width2 && x2 <= x1 + width1) && (y2 >= y1 - height2 && y2 <= y1 + height1)) {
 			return true;
 		}

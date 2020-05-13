@@ -10,13 +10,9 @@ public class Art {//static constructor
 	 * Array of sprites from the Sprite.png file in res.
 	 */
 	public static BufferedImage SPRITES[][] = loadImages("Sprites.png");
-
 	public static Color[][] MAP = loadMap(ImageLoader.load("Map.png"));
-
 	public static HashMap<Color, BufferedImage> COLORMAP = loadColorMap(); 
 	
-	private static int count = 0;
-
 
 	/**
 	 * 

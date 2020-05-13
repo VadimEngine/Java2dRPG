@@ -36,7 +36,6 @@ public class Animation {
 			if (count == i) {
 				currentImg = images[i];
 			}
-
 		}
 		count++;
 
